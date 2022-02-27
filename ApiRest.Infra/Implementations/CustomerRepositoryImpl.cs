@@ -17,7 +17,7 @@ namespace ApiRest.Infra.Implementations
             _db = db;
         }
 
-        public async Task Add(ICustomerRepository entity)
+        public async Task Add(Customer entity)
         {
             await _db.AddAsync(entity);
             await _db.SaveChangesAsync();

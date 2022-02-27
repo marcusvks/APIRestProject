@@ -10,6 +10,6 @@ namespace ApiRest.Infra.Interfaces
     public interface ICustomerRepository
     {
         IQueryable<Customer> GetAll();
-        Task Add(ICustomerRepository entity);
+        Task Add(Customer entity);
     }
 }

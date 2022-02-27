@@ -1,4 +1,6 @@
-﻿using ApiRest.Infra.Interfaces;
+﻿using ApiRest.Domain;
+using ApiRest.Infra.Interfaces;
+using ApiRest.Presentation.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,5 +22,23 @@ namespace ApiRest.Presentation.Controllers
         {
             return Ok(_repository.GetAll());
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(Customer customer)
+        {
+
+            try
+            {
+                await _repository.Add(customer);
+                return StatusCode((int)ApiStatus.Created);
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode((int)ApiStatus.InternalServerError, ex.Message);
+            }
+        }
+
+
     }
 }
