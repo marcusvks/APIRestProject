@@ -2,6 +2,7 @@ using ApiRest.Infra;
 using ApiRest.Infra.Implementations;
 using ApiRest.Infra.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Decrypter;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +16,15 @@ builder.Services.AddSwaggerGen();
 //configuraçoes para o appsetings
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-var ConnectionString = builder.Configuration.GetSection("ConnectionString")["ApiRestDatabase"];
+string passEncrypted = builder.Configuration.GetSection("ConnectionString")["PasswordEncrypted"];
+var user = builder.Configuration.GetSection("ConnectionString")["User"];
+var server = builder.Configuration.GetSection("ConnectionString")["Server"];
 
+string passDecrypted = Decrypter.Decrypter.Decrypt(passEncrypted);
+
+var ConnectionString = $"user id={user};password={passDecrypted};server={server};database=ApiRestDatabase;connection timeout=150;MultipleActiveResultSets=true";
+
+//configuração para o entity acessar o banco
 builder.Services.AddDbContext<MainContext>(options => options.UseSqlServer(ConnectionString));
 
 

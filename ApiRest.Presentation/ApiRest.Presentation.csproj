@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApiRest.Infra\ApiRest.Infra.csproj" />
+    <ProjectReference Include="..\Decrypter\Decrypter.csproj" />
   </ItemGroup>
 
 </Project>
