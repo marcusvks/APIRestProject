@@ -18,12 +18,14 @@ namespace ApiRest.Presentation.Controllers
         }
 
         [HttpGet]
+        [Route("GetCustomers")]
         public IActionResult Get()
         {
             return Ok(_repository.GetAll());
         }
 
         [HttpPost]
+        [Route("AddCustomers")]
         public async Task<IActionResult> Add(Customer customer)
         {
 
