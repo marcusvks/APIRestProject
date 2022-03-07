@@ -16,20 +16,20 @@ builder.Services.AddSwaggerGen();
 //configuraçoes para o appsetings
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-string passEncrypted = builder.Configuration.GetSection("ConnectionString")["PasswordEncrypted"];
-var user = builder.Configuration.GetSection("ConnectionString")["User"];
-var server = builder.Configuration.GetSection("ConnectionString")["Server"];
+//string passEncrypted = builder.Configuration.GetSection("ConnectionString")["PasswordEncrypted"];
+//var user = builder.Configuration.GetSection("ConnectionString")["User"];
+//var server = builder.Configuration.GetSection("ConnectionString")["Server"];
 
-string passDecrypted = Decrypter.Decrypter.Decrypt(passEncrypted);
+//string passDecrypted = Decrypter.Decrypter.Decrypt(passEncrypted);
 
-var ConnectionString = $"user id={user};password={passDecrypted};server={server};database=ApiRestDatabase;connection timeout=150;MultipleActiveResultSets=true";
+//var ConnectionString = $"user id={user};password={passDecrypted};server={server};database=ApiRestDatabase;connection timeout=150;MultipleActiveResultSets=true";
 
-//configuração para o entity acessar o banco
-builder.Services.AddDbContext<MainContext>(options => options.UseSqlServer(ConnectionString));
+////configuração para o entity acessar o banco
+//builder.Services.AddDbContext<MainContext>(options => options.UseSqlServer(ConnectionString));
 
 
 //dependencias
-builder.Services.AddScoped<ICustomerRepository, CustomerRepositoryImpl>();
+//builder.Services.AddScoped<ICustomerRepository, CustomerRepositoryImpl>();
 
 
 var app = builder.Build();
