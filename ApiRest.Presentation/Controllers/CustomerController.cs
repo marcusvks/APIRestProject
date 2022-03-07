@@ -1,13 +1,15 @@
 ﻿using ApiRest.Domain;
 using ApiRest.Infra.Interfaces;
 using ApiRest.Presentation.Enums;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiRest.Presentation.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerRepository _repository;
@@ -21,6 +23,7 @@ namespace ApiRest.Presentation.Controllers
         [Route("GetCustomers")]
         public IActionResult Get()
         {
+
             return Ok(_repository.GetAll());
         }
 

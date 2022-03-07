@@ -9,16 +9,20 @@
             
             foreach (var character in charList)
             {
-                if (character.ToString() == "2")
+                if (character.ToString() == "0")
                     passDecrypt = passDecrypt + "1";
-                else if (character.ToString() == "6")
+                else if (character.ToString() == "4")
                     passDecrypt = passDecrypt + "5";
-                else if (character.ToString() == "q")
-                    passDecrypt = passDecrypt + "m";
+                else if (character.ToString() == "8")
+                    passDecrypt = passDecrypt + "9";
+                else if (character.ToString() == "1")
+                    passDecrypt = passDecrypt + "2";
+                else if (character.ToString() == "Q")
+                    passDecrypt = passDecrypt + "M";
                 else if (character.ToString() == "w")
                     passDecrypt = passDecrypt + "v";
-                else if (character.ToString() == "e")
-                    passDecrypt = passDecrypt + "k";
+                else if (character.ToString() == "E")
+                    passDecrypt = passDecrypt + "K";
                 else if (character.ToString() == "r")
                     passDecrypt = passDecrypt + "s";
                 else

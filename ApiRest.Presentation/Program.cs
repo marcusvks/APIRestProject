@@ -1,8 +1,10 @@
 using ApiRest.Infra;
 using ApiRest.Infra.Implementations;
 using ApiRest.Infra.Interfaces;
+using ApiRest.Presentation.Extentions;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
-using Decrypter;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAuthentication("BasicAuthentication")
+    .AddScheme<AuthenticationSchemeOptions, BasicAuth>("BasicAuthentication", null);
 
 //configuraçoes para o appsetings
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
@@ -27,24 +32,16 @@ var ConnectionString = $"user id={user};password={passDecrypted};server={server}
 //configuração para o entity acessar o banco
 builder.Services.AddDbContext<MainContext>(options => options.UseSqlServer(ConnectionString));
 
-
 //dependencias
 builder.Services.AddScoped<ICustomerRepository, CustomerRepositoryImpl>();
 
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
