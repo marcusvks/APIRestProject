@@ -1,10 +1,5 @@
 ﻿using ApiRest.Domain;
 using ApiRest.Infra.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiRest.Infra.Implementations
 {
@@ -26,6 +21,14 @@ namespace ApiRest.Infra.Implementations
         public IQueryable<Customer> GetAll()
         {
             return _db.Customer;
+        }
+
+        public IQueryable<Customer> GetById(Guid id)
+        {
+            return from customer in _db.Customer
+                        where customer.Id == id
+                        select customer;
+
         }
     }
 }

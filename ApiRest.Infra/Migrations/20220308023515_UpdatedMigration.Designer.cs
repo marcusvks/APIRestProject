@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiRest.Infra.Migrations
 {
     [DbContext(typeof(MainContext))]
-    [Migration("20220227100750_TableCustomer")]
-    partial class TableCustomer
+    [Migration("20220308023515_UpdatedMigration")]
+    partial class UpdatedMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,6 +42,10 @@ namespace ApiRest.Infra.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using ApiRest.Domain;
+using ApiRest.Infra.Interfaces;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Headers;
 using System.Security.Claims;
@@ -9,25 +11,29 @@ namespace ApiRest.Presentation.Extentions
 {
     public class BasicAuth : AuthenticationHandler<AuthenticationSchemeOptions>
     {
-        public BasicAuth(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock)
+        private readonly ICustomerRepository _repository;
+
+        public BasicAuth(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, 
+            ISystemClock clock, ICustomerRepository repository) : base(options, logger, encoder, clock)
         {
+            _repository = repository;
         }
 
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            //Autenticação básica momentanea
-            string user = "marcus";
-            string pass = "155115mvks";
 
             try
             {
+                //pega os parametros do parametros BasicAuth do header da chamada
                 var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
                 var credentialBytes = Convert.FromBase64String(authHeader.Parameter);
                 var credentials = Encoding.UTF8.GetString(credentialBytes).Split(new[] { ':' }, 2);
                 var username = credentials[0];
                 var password = credentials[1];
 
-                if (user == username && pass == password)
+                Customer customer = _repository.GetById(Guid.Parse(username)).FirstOrDefault();
+
+                if (customer != null && customer.Password == password)
                 {
                     var claims = new[] { new Claim(ClaimTypes.NameIdentifier, ""), new Claim(ClaimTypes.Name, ""), };
 

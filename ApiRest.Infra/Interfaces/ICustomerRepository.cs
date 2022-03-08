@@ -1,9 +1,5 @@
 ﻿using ApiRest.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ApiRest.Infra.Interfaces
 {
@@ -11,5 +7,6 @@ namespace ApiRest.Infra.Interfaces
     {
         IQueryable<Customer> GetAll();
         Task Add(Customer entity);
+        IQueryable<Customer> GetById(Guid id);
     }
 }

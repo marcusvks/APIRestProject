@@ -21,5 +21,6 @@ namespace ApiRest.Domain
         [Required(ErrorMessage = "The Field Age is Mandatory")]
         public int Age { get; set; }
 
+        public string Password {get;set;}
     }
 }
