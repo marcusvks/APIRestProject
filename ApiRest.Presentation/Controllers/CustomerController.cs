@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ApiRest.Presentation.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
 

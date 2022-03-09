@@ -24,28 +24,38 @@ namespace ApiRest.Presentation.Extentions
 
             try
             {
-                //pega os parametros do parametros BasicAuth do header da chamada
-                var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
-                var credentialBytes = Convert.FromBase64String(authHeader.Parameter);
-                var credentials = Encoding.UTF8.GetString(credentialBytes).Split(new[] { ':' }, 2);
-                var username = credentials[0];
-                var password = credentials[1];
+                var claims = new[] { new Claim(ClaimTypes.NameIdentifier, ""), new Claim(ClaimTypes.Name, ""), };
 
-                Customer customer = _repository.GetById(Guid.Parse(username)).FirstOrDefault();
+                var identity = new ClaimsIdentity(claims, Scheme.Name);
+                var principal = new ClaimsPrincipal(identity);
+                var ticket = new AuthenticationTicket(principal, Scheme.Name);
 
-                if (customer != null && customer.Password == password)
-                {
-                    var claims = new[] { new Claim(ClaimTypes.NameIdentifier, ""), new Claim(ClaimTypes.Name, ""), };
+                return AuthenticateResult.Success(ticket);
 
-                    var identity = new ClaimsIdentity(claims, Scheme.Name);
-                    var principal = new ClaimsPrincipal(identity);
-                    var ticket = new AuthenticationTicket(principal, Scheme.Name);
 
-                    return AuthenticateResult.Success(ticket);
-                }
 
-                else
-                    return AuthenticateResult.Fail("Invalid Username or Password");
+                ////pega os parametros do parametros BasicAuth do header da chamada
+                //var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
+                //var credentialBytes = Convert.FromBase64String(authHeader.Parameter);
+                //var credentials = Encoding.UTF8.GetString(credentialBytes).Split(new[] { ':' }, 2);
+                //var username = credentials[0];
+                //var password = credentials[1];
+
+                //Customer customer = _repository.GetById(Guid.Parse(username)).FirstOrDefault();
+
+                //if (customer != null && customer.Password == password)
+                //{
+                //    var claims = new[] { new Claim(ClaimTypes.NameIdentifier, ""), new Claim(ClaimTypes.Name, ""), };
+
+                //    var identity = new ClaimsIdentity(claims, Scheme.Name);
+                //    var principal = new ClaimsPrincipal(identity);
+                //    var ticket = new AuthenticationTicket(principal, Scheme.Name);
+
+                //    return AuthenticateResult.Success(ticket);
+                //}
+
+                //else
+                //    return AuthenticateResult.Fail("Invalid Username or Password");
             }
             catch
             {
