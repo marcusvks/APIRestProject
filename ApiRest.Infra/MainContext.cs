@@ -11,5 +11,7 @@ namespace ApiRest.Infra
         }
 
         public DbSet<Customer> Customer {get;set;}
+        public DbSet<Arduino> Arduino { get; set; }
+        public DbSet<ArduinoAction> ArduinoAction { get; set; }
     }
 }
