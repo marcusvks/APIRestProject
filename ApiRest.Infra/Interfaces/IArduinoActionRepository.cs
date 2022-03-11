@@ -6,6 +6,6 @@ namespace ApiRest.Infra.Interfaces
     {
         IQueryable<ArduinoAction> GetAll();
         Task Add(ArduinoAction entity);
-        IQueryable<ArduinoAction> GetById(int id);
+        IQueryable<int> GetActiveAction(int arduinoId);
     }
 }

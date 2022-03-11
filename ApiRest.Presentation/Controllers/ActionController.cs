@@ -26,6 +26,15 @@ namespace ApiRest.Presentation.Controllers
             return Ok(_repository.GetAll());
         }
 
+        [HttpGet]
+        [Route("GetActiveActions")]
+        public IActionResult GetActiveActions(int arduinoId)
+        {
+            string TypeAction = Enum.GetName(typeof(TypeActions), _repository.GetActiveAction(arduinoId).FirstOrDefault());
+
+            return Ok(TypeAction);
+        }
+
         [HttpPost]
         [Route("AddAction")]
         public async Task<IActionResult> Add(ArduinoAction arduinoAction)
@@ -33,7 +42,7 @@ namespace ApiRest.Presentation.Controllers
 
             try
             {
-                arduinoAction.InsertDate = DateTime.Now;
+                arduinoAction.InsertedDate = DateTime.Now;
 
                 await _repository.Add(arduinoAction);
                 return StatusCode((int)ApiStatus.Created);
@@ -45,6 +54,12 @@ namespace ApiRest.Presentation.Controllers
             }
         }
 
+        public enum TypeActions
+        {
+            ligarled = 1,
+            action2 = 2,  
+     
+        }
 
     }
 }

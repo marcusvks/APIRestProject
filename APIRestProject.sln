@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - InfraEstructure", "2 - 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiRest.Infra", "ApiRest.Infra\ApiRest.Infra.csproj", "{267AEE53-793F-4734-9D0C-87A95B8C3BD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Decrypter", "Decrypter\Decrypter.csproj", "{71D85838-8151-42CF-AA26-228187973F14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decrypter", "Decrypter\Decrypter.csproj", "{71D85838-8151-42CF-AA26-228187973F14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArduinoUI", "ArduinoUI\ArduinoUI.csproj", "{3BBEB23D-71C6-4D70-89CB-FF3B9D62F395}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{71D85838-8151-42CF-AA26-228187973F14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71D85838-8151-42CF-AA26-228187973F14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71D85838-8151-42CF-AA26-228187973F14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BBEB23D-71C6-4D70-89CB-FF3B9D62F395}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BBEB23D-71C6-4D70-89CB-FF3B9D62F395}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BBEB23D-71C6-4D70-89CB-FF3B9D62F395}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BBEB23D-71C6-4D70-89CB-FF3B9D62F395}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

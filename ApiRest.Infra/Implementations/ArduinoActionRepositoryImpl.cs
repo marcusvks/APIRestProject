@@ -18,17 +18,16 @@ namespace ApiRest.Infra.Implementations
             await _db.SaveChangesAsync();
         }
 
+        public IQueryable<int> GetActiveAction(int arduinoId)
+        {
+            return from arduinoAction in _db.ArduinoAction
+                   where arduinoAction.ArduinoId == arduinoId && arduinoAction.ExecutionDate == default(DateTime) orderby arduinoAction.IdAction descending
+                   select arduinoAction.TypeAction;
+        }
+
         public IQueryable<ArduinoAction> GetAll()
         {
             return _db.ArduinoAction;
-        }
-
-        public IQueryable<ArduinoAction> GetById(int id)
-        {
-            return from arduinoAction in _db.ArduinoAction
-                   where arduinoAction.IdAction == id
-                   select arduinoAction;
-
         }
     }
 }

@@ -26,6 +26,8 @@ namespace ApiRest.Presentation.Extentions
         public static void ConfigureDependencies(WebApplicationBuilder builder)
         {
             builder.Services.AddScoped<ICustomerRepository, CustomerRepositoryImpl>();
+            builder.Services.AddScoped<IArduinoRepository, ArduinoRepositoryImpl>();
+            builder.Services.AddScoped<IArduinoActionRepository, ArduinoActionRepositoryImpl>();
 
         }
 

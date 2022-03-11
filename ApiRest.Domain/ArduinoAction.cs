@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using System.Text.Json.Serialization;
 
 namespace ApiRest.Domain
 {
@@ -9,6 +9,7 @@ namespace ApiRest.Domain
     public class ArduinoAction
     {
         [Key]
+        [JsonIgnore]
         public int IdAction { get; set; }
 
         [Required(ErrorMessage = "The Field NameAction is Mandatory")]
@@ -17,8 +18,11 @@ namespace ApiRest.Domain
         [Required(ErrorMessage = "The Field TypeAction is Mandatory")]
         public int TypeAction { get; set; }
 
-        public DateTime InsertDate { get; set; }
-        public DateTime UpdateDate { get; set; }
+        [JsonIgnore]
+        public DateTime InsertedDate { get; set; }
+
+        [JsonIgnore]
+        public DateTime ExecutionDate { get; set; }
 
         [Required(ErrorMessage = "The Field ArduinoId is Mandatory")]
         [ForeignKey("Arduino")]
