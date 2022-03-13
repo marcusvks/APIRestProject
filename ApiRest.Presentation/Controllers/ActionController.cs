@@ -27,19 +27,43 @@ namespace ApiRest.Presentation.Controllers
         }
 
         [HttpGet]
+        [Route("CompleteAction")]
+        public IActionResult CompleteAction(int actionId)
+        {
+            _repository.UpdateStatus(actionId, (int)StatusActions.Completed);
+
+            return Ok(_repository.GetAll());
+        }
+
+        [HttpGet]
         [Route("GetActiveActions")]
         public IActionResult GetActiveActions(int arduinoId)
         {
-            string TypeAction = Enum.GetName(typeof(TypeActions), _repository.GetActiveAction(arduinoId).FirstOrDefault());
 
-            return Ok(TypeAction);
+            ArduinoAction action = _repository.GetActiveAction(arduinoId);
+
+            if (action != null)
+            {
+                int TypeAction = action.TypeAction;
+                int actionId = action.IdAction;
+
+                if (actionId == default || TypeAction == default)
+                    return StatusCode((int)ApiStatus.InternalServerError, "");
+                else
+                {
+                    _repository.UpdateStatus(actionId, (int)StatusActions.Started);
+                }
+
+                return Ok(TypeAction);
+            }
+            else
+                return NotFound();
         }
 
         [HttpPost]
         [Route("AddAction")]
         public async Task<IActionResult> Add(ArduinoAction arduinoAction)
         {
-
             try
             {
                 arduinoAction.InsertedDate = DateTime.Now;
@@ -59,6 +83,13 @@ namespace ApiRest.Presentation.Controllers
             ligarled = 1,
             action2 = 2,  
      
+        }
+        public enum StatusActions
+        {
+            Created = 0,
+            Started = 1,
+            Completed = 2,
+
         }
 
     }

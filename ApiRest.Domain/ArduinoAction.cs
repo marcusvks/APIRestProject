@@ -27,5 +27,8 @@ namespace ApiRest.Domain
         [Required(ErrorMessage = "The Field ArduinoId is Mandatory")]
         [ForeignKey("Arduino")]
         public int ArduinoId { get; set; }
+
+        [JsonIgnore]
+        public int Status { get; set; }
     }
 }
