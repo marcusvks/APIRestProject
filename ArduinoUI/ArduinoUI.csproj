@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Action.cs" />
+    <Compile Include="Models\ReturnActiveAction.cs" />
     <Compile Include="Screens\ArduinoActions.cs">
       <SubType>Form</SubType>
     </Compile>

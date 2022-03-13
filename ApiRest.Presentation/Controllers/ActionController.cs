@@ -3,6 +3,7 @@ using ApiRest.Infra.Interfaces;
 using ApiRest.Presentation.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using ArduinoUI.Models;
 
 namespace ApiRest.Presentation.Controllers
 {
@@ -32,7 +33,7 @@ namespace ApiRest.Presentation.Controllers
         {
             _repository.UpdateStatus(actionId, (int)StatusActions.Completed);
 
-            return Ok(_repository.GetAll());
+            return Ok();
         }
 
         [HttpGet]
@@ -44,17 +45,20 @@ namespace ApiRest.Presentation.Controllers
 
             if (action != null)
             {
-                int TypeAction = action.TypeAction;
-                int actionId = action.IdAction;
+                ReturnActiveAction activeAction = new ReturnActiveAction
+                {
+                    TypeAction = action.TypeAction,
+                    actionId = action.IdAction,
+                };
 
-                if (actionId == default || TypeAction == default)
+                if (activeAction.actionId == default || activeAction.TypeAction == default)
                     return StatusCode((int)ApiStatus.InternalServerError, "");
                 else
                 {
-                    _repository.UpdateStatus(actionId, (int)StatusActions.Started);
+                    _repository.UpdateStatus(activeAction.actionId, (int)StatusActions.Started);
                 }
 
-                return Ok(TypeAction);
+                return Ok(activeAction);
             }
             else
                 return NotFound();
@@ -81,8 +85,8 @@ namespace ApiRest.Presentation.Controllers
         public enum TypeActions
         {
             ligarled = 1,
-            action2 = 2,  
-     
+            action2 = 2,
+
         }
         public enum StatusActions
         {
