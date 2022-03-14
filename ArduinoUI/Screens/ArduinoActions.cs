@@ -11,22 +11,26 @@ namespace ArduinoUI
     public partial class ArduinoActions : Form
     {
         static HttpClient client = new HttpClient();
+        
 
         public ArduinoActions()
         {
             InitializeComponent();
+            client = ConfigureApiParameter();
         }
 
         private async Task CallApiAddAction(string acao, int arduinoId, string nomeAcao)
         {
+            int acaoConvertida = acao.Contains("desligar") ? (int)TypeActions.desligarled : (int)TypeActions.ligarled;
+
             Action action = new Action
             {
                 NameAction = nomeAcao,
                 ArduinoId = arduinoId,
-                TypeAction = (int)TypeActions.ligarled
+                TypeAction = acaoConvertida,
             };
 
-            client = ConfigureApiParameter();
+            
 
             HttpResponseMessage response = await client.PostAsync("api/Action/AddAction",
                 new StringContent(JsonSerializer.Serialize(action), Encoding.UTF8, "application/json"));
@@ -63,8 +67,16 @@ namespace ArduinoUI
         public enum TypeActions
         {
             ligarled = 1,
-            action2 = 2,
+            desligarled = 2,
 
+        }
+
+        private void btnDesligarLed_Click(object sender, EventArgs e)
+        {
+            int arduinoId = 1;
+            string nomeAcao = "Ação para desligar o LED do arduino";
+
+            CallApiAddAction(TypeActions.desligarled.ToString(), arduinoId, nomeAcao);
         }
     }
 }

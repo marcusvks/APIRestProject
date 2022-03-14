@@ -30,7 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.btnLigarLed = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnDesligarLed = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -55,27 +55,28 @@
             this.btnLigarLed.UseVisualStyleBackColor = true;
             this.btnLigarLed.Click += new System.EventHandler(this.btnLigarLed_ClickAsync);
             // 
-            // button2
+            // btnDesligarLed
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(228, 122);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(152, 48);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Action2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnDesligarLed.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDesligarLed.Location = new System.Drawing.Point(228, 122);
+            this.btnDesligarLed.Name = "btnDesligarLed";
+            this.btnDesligarLed.Size = new System.Drawing.Size(152, 48);
+            this.btnDesligarLed.TabIndex = 2;
+            this.btnDesligarLed.Text = "Desligar LED";
+            this.btnDesligarLed.UseVisualStyleBackColor = true;
+            this.btnDesligarLed.Click += new System.EventHandler(this.btnDesligarLed_Click);
             // 
-            // Form1
+            // ArduinoActions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(412, 182);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnDesligarLed);
             this.Controls.Add(this.btnLigarLed);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form1";
+            this.Name = "ArduinoActions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ArduinoActions";
             this.ResumeLayout(false);
@@ -87,7 +88,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnLigarLed;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnDesligarLed;
     }
 }
 
