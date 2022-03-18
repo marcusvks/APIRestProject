@@ -59,7 +59,7 @@ namespace ArduinoUI
         private void btnLigarLed_ClickAsync(object sender, EventArgs e)
         {
             int arduinoId = 1;
-            string nomeAcao = "Ação para ligar o LED do arduino";
+            string nomeAcao = "Ação Para Ligar o LED do Arduino";
 
             CallApiAddAction(TypeActions.ligarled.ToString(), arduinoId, nomeAcao);
         }
@@ -74,7 +74,7 @@ namespace ArduinoUI
         private void btnDesligarLed_Click(object sender, EventArgs e)
         {
             int arduinoId = 1;
-            string nomeAcao = "Ação para desligar o LED do arduino";
+            string nomeAcao = "Ação Para Desligar o LED do Arduino";
 
             CallApiAddAction(TypeActions.desligarled.ToString(), arduinoId, nomeAcao);
         }
