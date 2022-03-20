@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApiRest.Infra\ApiRest.Infra.csproj" />
+    <ProjectReference Include="..\ArduinoUI\ArduinoUI.csproj" />
     <ProjectReference Include="..\Decrypter\Decrypter.csproj" />
   </ItemGroup>
 
